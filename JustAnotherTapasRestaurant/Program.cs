@@ -1,7 +1,15 @@
+using JustAnotherTapasRestaurant.Model;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<ResturantContext>(options =>
+{
+	options.UseSqlServer("Server=mssql.chester.network;Database=db_2323101_web;Trusted_Connection=True;TrustCertificate=True;");
+});
 
 var app = builder.Build();
 
