@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using JustAnotherTapasRestaurant.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<JustAnotherTapasRestaurantContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("JustAnotherTapasRestaurantContext") ?? throw new InvalidOperationException("Connection string 'JustAnotherTapasRestaurantContext' not found.")));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
@@ -13,7 +20,20 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+else
+{
+	app.UseDeveloperExceptionPage();
+	app.UseMigrationsEndPoint();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+	var services = scope.ServiceProvider;
+	var context = services.GetRequiredService<JustAnotherTapasRestaurantContext>();
+	context.Database.EnsureCreated();
+}
+
+	app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
