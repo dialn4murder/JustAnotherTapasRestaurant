@@ -7,5 +7,37 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to Just Another Tapas Restaurant</h1>
     <p>Another Tapas Restaurant that only does tapas, will only do tapas and is contributing to the oversaturated tapas market</a>.</p>
-    <img src="/img/kermit.jpg">
+    
+</div>
+
+<h2>Search</h2>
+<form method="post">
+    <div>Search <input asp-for="Search" /></div>
+    <button type="submit" asp-page-handler="Search">Submit</button>
+</form>
+
+<div class="text-center">
+    <h2 class="display-4">Our Menu Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var tblMenuItems in Model.MenuItem)
+            {
+                <tr>
+                    <td>@tblMenuItems.Id</td>
+                    <td>@tblMenuItems.Item</td>
+                    <td>@tblMenuItems.Description</td>
+                    <td>@tblMenuItems.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
