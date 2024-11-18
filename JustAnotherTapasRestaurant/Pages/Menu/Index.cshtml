@@ -25,7 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.MenuItem[0].Stock)
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
@@ -44,10 +44,28 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayNameFor(Model => Model.MenuItem[0].ImageDescription)
             </td>
+           
+                @{
+                    try
+                    {
+                        <td>
+                            <img = src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.ImageData))" alt="@item.ImageDescription" />
+                        </td>
+                    }
+                    catch
+                    {
+                        <td>
+                            <img class="img-thumb" src="/img/kermit.jpg" alt="No Image provided" />
+                        </td>
+                    }
+                }
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
         </tr>
 }
     </tbody>
