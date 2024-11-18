@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using JustAnotherTapasRestaurant.Data;
 using JustAnotherTapasRestaurant.Models;
+using System.IO;
 
 namespace JustAnotherTapasRestaurant.Pages.Menu
 {
@@ -33,6 +34,16 @@ namespace JustAnotherTapasRestaurant.Pages.Menu
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            foreach (var file in Request.Form.Files)
+            {
+                MemoryStream ms = new MemoryStream();
+                file.CopyTo(ms);
+                MenuItem.ImageData = ms.ToArray();
+
+                ms.Close();
+                ms.Dispose();
             }
 
             _context.MenuItems.Add(MenuItem);
