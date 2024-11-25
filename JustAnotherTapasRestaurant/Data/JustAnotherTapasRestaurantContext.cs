@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using JustAnotherTapasRestaurant.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace JustAnotherTapasRestaurant.Data
 {
@@ -18,6 +20,7 @@ namespace JustAnotherTapasRestaurant.Data
         public DbSet<MenuItem> MenuItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<MenuItem>().ToTable("MenuItem");
         }
 
