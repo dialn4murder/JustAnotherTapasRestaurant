@@ -2,6 +2,7 @@
 {
     public class MenuItem
     {
+        // Creates representation of fields from the database
         public int Id { get; set; }
         public string Item {  get; set; }
         public string Description { get; set; }

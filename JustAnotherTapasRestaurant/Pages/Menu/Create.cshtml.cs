@@ -35,11 +35,13 @@ namespace JustAnotherTapasRestaurant.Pages.Menu
             {
                 return Page();
             }
-
+            // Catching photo in the controller
             foreach (var file in Request.Form.Files)
             {
+                // Converts file to binary stream
                 MemoryStream ms = new MemoryStream();
                 file.CopyTo(ms);
+                // Save to byte array
                 MenuItem.ImageData = ms.ToArray();
 
                 ms.Close();
