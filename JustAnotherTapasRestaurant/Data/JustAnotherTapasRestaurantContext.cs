@@ -16,7 +16,7 @@ namespace JustAnotherTapasRestaurant.Data
         {
         }
 
-        // public DbSet<JustAnotherTapasRestaurant.Models.MenuItem> MenuItem { get; set; } = default!;
+        // Will update the context to include the table
         public DbSet<MenuItem> MenuItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

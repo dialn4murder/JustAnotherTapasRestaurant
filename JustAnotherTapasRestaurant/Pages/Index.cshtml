@@ -11,11 +11,14 @@
 </div>
 
 <h2>Search</h2>
+
+<!-- Adds a search bar for the database -->
 <form method="post">
     <div>Search <input asp-for="Search" /></div>
     <button type="submit" asp-page-handler="Search">Submit</button>
 </form>
 
+<!-- Headings -->
 <div class="text-center">
     <h2 class="display-4">Our Menu Items</h2>
     <table>
@@ -28,7 +31,7 @@
               
             
         </thead>
-        
+        <!-- Loop through the list and displays each row -->
         <tbody>
             @foreach (var tblMenuItems in Model.MenuItem)
             {

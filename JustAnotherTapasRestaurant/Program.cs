@@ -8,6 +8,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<JustAnotherTapasRestaurantContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("JustAnotherTapasRestaurantContext") ?? throw new InvalidOperationException("Connection string 'JustAnotherTapasRestaurantContext' not found.")));
 
+// Includes error information for migration errors
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
@@ -20,12 +21,14 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
+// Includes error informtion for migration errors
 else
 {
 	app.UseDeveloperExceptionPage();
 	app.UseMigrationsEndPoint();
 }
 
+// Ensures that the database is created if a database doesnt exist
 using (var scope = app.Services.CreateScope())
 {
 	var services = scope.ServiceProvider;
