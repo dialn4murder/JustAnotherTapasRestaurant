@@ -1,12 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using JustAnotherTapasRestaurant.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<JustAnotherTapasRestaurantContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("JustAnotherTapasRestaurantContext") ?? throw new InvalidOperationException("Connection string 'JustAnotherTapasRestaurantContext' not found.")));
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<JustAnotherTapasRestaurantContext>();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+
+	options =>
+	{
+		options.Stores.MaxLengthForKeys = 128;
+	})
+	// Operates on database and gives default ui, token providers and roles
+	.AddEntityFrameworkStores<JustAnotherTapasRestaurantContext>()
+	.AddRoles<IdentityRole>()
+	.AddDefaultUI()
+	.AddDefaultTokenProviders();
+
 
 // Includes error information for migration errors
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -44,5 +60,15 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope()) 
+{
+	var services = scope.ServiceProvider;
+	var context = services.GetRequiredService<JustAnotherTapasRestaurantContext>();
+	context.Database.Migrate();
+	var userMgr = services.GetRequiredService<UserManager<IdentityUser>>();
+	var roleMgr = services.GetRequiredService<RoleManager<IdentityRole>>();
+	IdentitySeedData.Initialize(context, userMgr, roleMgr).Wait();
+}
 
 app.Run();
