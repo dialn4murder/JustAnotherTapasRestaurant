@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using JustAnotherTapasRestaurant.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
 
 namespace JustAnotherTapasRestaurant.Data
 {
-    public class JustAnotherTapasRestaurantContext : DbContext
+    public class JustAnotherTapasRestaurantContext : IdentityDbContext
     {
         public JustAnotherTapasRestaurantContext (DbContextOptions<JustAnotherTapasRestaurantContext> options)
             : base(options)
