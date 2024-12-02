@@ -36,7 +36,7 @@ namespace JustAnotherTapasRestaurant.Data
                 {
                     UserName = "admin@chester.ac.uk",
                     Email = "admin@chester.ac.uk",
-                    PhoneNumber = "1234567890",
+                    PhoneNumber = "1234567890"
                 };
 
                 var result = await userManager.CreateAsync(user);
@@ -54,7 +54,7 @@ namespace JustAnotherTapasRestaurant.Data
                 {
                     UserName = "member@chester.ac.uk",
                     Email = "member@chester.ac.uk",
-                    PhoneNumber = "1234567890",
+                    PhoneNumber = "1234567890"
                 };
 
                 var result = await userManager.CreateAsync(user);
