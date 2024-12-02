@@ -52,7 +52,7 @@ using (var scope = app.Services.CreateScope())
 	context.Database.EnsureCreated();
 }
 
-	app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
