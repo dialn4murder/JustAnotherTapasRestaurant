@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using JustAnotherTapasRestaurant.Data;
 using JustAnotherTapasRestaurant.Models;
 
-namespace JustAnotherTapasRestaurant.Pages.Menu
+namespace JustAnotherTapasRestaurant.Pages.Admin
 {
     public class EditModel : PageModel
     {

@@ -1,19 +1,18 @@
 ﻿@page
-@model JustAnotherTapasRestaurant.Pages.Menu.EditModel
+@model JustAnotherTapasRestaurant.Pages.Admin.CreateModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
 <h4>MenuItem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MenuItem.Id" />
             <div class="form-group">
                 <label asp-for="MenuItem.Item" class="control-label"></label>
                 <input asp-for="MenuItem.Item" class="form-control" />
@@ -35,14 +34,25 @@
                 <span asp-validation-for="MenuItem.Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="MenuItem.ImageDescription" class="control-label">Image Description (Alt-text)</label>
+                <input asp-for="MenuItem.ImageDescription" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="MenuItem.ImageData" class="control-label">Image Upload</label>
+
+                <input type="file" id="file1"
+                    name="file1"
+                    multiple="multiple" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
