@@ -9,7 +9,7 @@ using JustAnotherTapasRestaurant.Data;
 using JustAnotherTapasRestaurant.Models;
 using System.IO;
 
-namespace JustAnotherTapasRestaurant.Pages.Menu
+namespace JustAnotherTapasRestaurant.Pages.Admin
 {
     public class CreateModel : PageModel
     {

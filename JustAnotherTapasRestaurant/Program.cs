@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using JustAnotherTapasRestaurant.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,6 +28,17 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(
 
 // Includes error information for migration errors
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+//Adds admin page admin authorization
+builder.Services.AddAuthorization(options =>
+{
+	options.AddPolicy("RequireAdmins", policy => policy.RequireRole("Admin"));
+});
+
+builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
+{
+	options.Conventions.AuthorizeFolder("/Admin", "RequireAdmins");
+});
 
 var app = builder.Build();
 
